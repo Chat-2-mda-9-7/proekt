@@ -5,8 +5,10 @@ import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
-import 'list_of_chats.dart';
-import 'list_of_teachers.dart';
+import 'osnovnoe_pr/list_of_chats.dart';
+import 'osnovnoe_pr/list_of_teachers.dart';
+import 'osnovnoe_pr/list_of_study.dart';
+import 'osnovnoe_pr/kabinet.dart';
 
 
 
@@ -36,42 +38,45 @@ class MyHomePage extends StatefulWidget {
 
 class _MyHomePageState extends State<MyHomePage> {
   int selectedIndex = 0;
-  late Widget _bodyWidget;
-
+  Widget _chatPage = ChatPage();
+  Widget _listTeachets=NoteList();
+  Widget _listStudy=ListStudy();
+  Widget _kabinet=Kabinet();
+  // late Widget _bodyWidget;
+  //
   // static List<Widget> listTimerWidget = <Widget>[
-  //   const StateTimerPage(waitTimeInSec: waitTime),
-  //   const BLoCTimerPage(waitTimeInSec: waitTime),
-  //   GetXTimerPage(
-  //     waitTimeInSec: waitTime,
-  //   )
-  // ];
-  @override
-  void initState() {
-    super.initState();
-    onItemTepped(selectedIndex);
-  }
+  //   ChatPage(waitChatPage:),
+  //   NoteList(),
+  //   ChatPage(waitChatPage:0),
+  //   ChatPage(waitChatPage:0),
+  //  ];
+   @override
+   void initState() {
+      super.initState();
+      onTapHandler(selectedIndex);
+    }
 
-  Widget _buildCurrentWidget(int type) {
-    switch (type) {
-      case 0:
-        return ChatPage();
-      case 1:
+ Widget _buildCurrentWidget(int type) {
+   switch (type) {
+     case 0:
+       return ChatPage();
+     case 1:
         return NoteList();
       case 2:
-        return ChatPage();
-      case 3:
-        return ChatPage();
-      default:
-        throw ArgumentError();
-    }
-  }
+        return ListStudy();
+     case 3:
+       return Kabinet();
+     default:
+       throw ArgumentError();
+   }
+ }
 
-  void onItemTepped(int index) {
-    setState(() {
-      selectedIndex = index;
-      _bodyWidget = _buildCurrentWidget(index);
-    });
-  }
+  // void onItemTepped(int index) {
+  //   setState(() {
+  //     selectedIndex = index;
+  //     _bodyWidget = _buildCurrentWidget(index);
+  //   });
+  // }
 
   @override
   Widget build(BuildContext context) {
@@ -80,14 +85,16 @@ class _MyHomePageState extends State<MyHomePage> {
         title: Text(widget.title),
         centerTitle: true,
       ),
-      body: _bodyWidget,
+      body: this.getBody(),
       bottomNavigationBar: BottomNavigationBar(
-        currentIndex: selectedIndex,
+        type: BottomNavigationBarType.fixed,
+        currentIndex: this.selectedIndex,
+        //currentIndex: selectedIndex,
         //selectedItemColor: Colors.red[800],
-        onTap: onItemTepped,
+        //onTap: onItemTepped,
         items: const [
           BottomNavigationBarItem(
-              backgroundColor: Colors.grey,
+              backgroundColor: Colors.white,
               icon: Icon(Icons.message_outlined, color: Colors.black),
               label: 'Чаты'),
           BottomNavigationBarItem(
@@ -104,7 +111,27 @@ class _MyHomePageState extends State<MyHomePage> {
             label: 'Личный кабинет',
           ),
         ],
+        onTap: (int index) {
+        this.onTapHandler(index);}
+        // currentIndex: selectedIndex,
+        // onTap: onItemTepped,
       ),
     );
   }
+  Widget getBody() {
+    if (this.selectedIndex == 0) {
+      return this._chatPage;
+    } else if (this.selectedIndex == 1) {
+      return this._listTeachets;
+    } else if(this.selectedIndex==2) {
+      return this._listStudy;
+    } else {return this._kabinet;
+    }
+  }
+  void onTapHandler(int index) {
+    this.setState(() {
+      this.selectedIndex = index;
+    });
+  }
+
 }
