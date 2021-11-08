@@ -4,12 +4,6 @@ import 'package:get/get.dart';
 
 class ChatPage extends StatelessWidget {
 
-
-
-
-  // ChatPage({Key? key}) : super(key: key) ;
-
-
   get myGradient => null;
 
   @override

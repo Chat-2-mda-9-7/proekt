@@ -24,8 +24,10 @@ class MyApp extends StatelessWidget {
       ),
       home: const MyHomePage(title: 'ЧАТ СПБГУПТД'),
     );
+
   }
 }
+
 
 class MyHomePage extends StatefulWidget {
   const MyHomePage({Key? key, required this.title}) : super(key: key);
@@ -96,21 +98,22 @@ class _MyHomePageState extends State<MyHomePage> {
           BottomNavigationBarItem(
               backgroundColor: Colors.white,
               icon: Icon(Icons.message_outlined, color: Colors.black),
-              label: 'Чаты'),
+              label: ''),
           BottomNavigationBarItem(
               icon: Icon(Icons.face, color: Colors.black),
-              label: 'Преподаватели'),
+              label: ''),
           BottomNavigationBarItem(
               icon: Icon(Icons.child_care, color: Colors.black),
-              label: 'Студенты'),
+              label: ''),
           BottomNavigationBarItem(
             icon: Icon(
               Icons.account_circle,
               color: Colors.black,
             ),
-            label: 'Личный кабинет',
+            label: '',
           ),
         ],
+
         onTap: (int index) {
         this.onTapHandler(index);}
         // currentIndex: selectedIndex,
