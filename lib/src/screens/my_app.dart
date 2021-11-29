@@ -6,6 +6,7 @@ import 'package:flutter/services.dart';
 
 
 import 'package:get/get.dart';
+import 'package:proekt/src/services/auth.dart';
 
 import '../nav_bar/list_of_chats.dart';
 import '../nav_bar/list_of_teachers.dart';
@@ -19,13 +20,14 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return GetMaterialApp(
+     return GetMaterialApp(
       title: 'Chat',
       theme: ThemeData(
         primarySwatch: Colors.blueGrey,
       ),
       home: const MyHomePage(title: 'ЧАТ СПБГУПТД'),
       color: Colors.black,
+
     );
 
   }
@@ -89,6 +91,9 @@ class _MyHomePageState extends State<MyHomePage> {
       appBar: AppBar(
         title: Text(widget.title),
         centerTitle: true,
+        actions: <Widget>[
+          FlatButton.icon(onPressed: (){AuthService().logOut();}, icon: Icon(Icons.supervised_user_circle, color: Colors.white,),
+            label: SizedBox.shrink(),),],
         systemOverlayStyle: SystemUiOverlayStyle(
         statusBarColor: Colors.blueGrey),
       ),

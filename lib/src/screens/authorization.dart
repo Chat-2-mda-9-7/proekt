@@ -131,12 +131,13 @@ class _AuthorizationState extends State<Authorization>{
 
       if(_email.isEmpty || _password.isEmpty) return;
 
-      Future<AuthUser?> user = _authService.signInWithEmailAndPassword(_email.trim(), _password.trim()); //**
+      AuthUser? user = await _authService.signInWithEmailAndPassword(_email.trim(), _password.trim()); //**
       if(user == null){
         Fluttertoast.showToast(
             msg: "Can`t SignIn you! Please check your email//password",
             toastLength: Toast.LENGTH_SHORT,
             gravity: ToastGravity.CENTER,
+            timeInSecForIosWeb: 1,
             backgroundColor: Colors.red,
             textColor: Colors.white,
             fontSize: 16.0
@@ -154,12 +155,13 @@ class _AuthorizationState extends State<Authorization>{
 
       if(_email.isEmpty || _password.isEmpty) return;
 
-      Future<AuthUser?> user = _authService.registerWithEmailAndPassword(_email.trim(), _password.trim());//**
+      AuthUser? user = await _authService.registerWithEmailAndPassword(_email.trim(), _password.trim());//**
       if(user == null){
         Fluttertoast.showToast(
             msg: "Can`t Register you! Please check your email//password",
             toastLength: Toast.LENGTH_SHORT,
             gravity: ToastGravity.CENTER,
+            timeInSecForIosWeb: 1,
             backgroundColor: Colors.red,
             textColor: Colors.white,
             fontSize: 16.0
@@ -199,7 +201,7 @@ class _AuthorizationState extends State<Authorization>{
                   Padding(
                     padding: EdgeInsets.all(10),
                     child: GestureDetector(
-                      child: Text('', style: TextStyle(fontSize: 20, color: Colors.black)),//No registered yet? Register!
+                      child: Text('Not registered yet? Register!', style: TextStyle(fontSize: 20, color: Colors.white)),//No registered yet? Register!
                       onTap:(){
                         setState((){
                           showLogin=false;
@@ -215,7 +217,7 @@ class _AuthorizationState extends State<Authorization>{
                   Padding(
                       padding: EdgeInsets.all(10),
                       child: GestureDetector(
-                          child: Text('', style: TextStyle(fontSize: 20, color: Colors.black)),//Alredy registered? Register!
+                          child: Text('Already register? Login!', style: TextStyle(fontSize: 20, color: Colors.white)),//Alredy registered? Register!
                           onTap:(){
                             setState((){
                               showLogin=true;

@@ -10,9 +10,9 @@ class LandingPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context){
-    final AuthUser user = Provider.of<AuthUser>(context);
+    final AuthUser? user = Provider.of<AuthUser>(context);
     final bool isLoggedIn = user != null;
 
-    return isLoggedIn ? MyApp() : MyAp();
+    return isLoggedIn ?  MyApp() : MyAp();
   }
 }
