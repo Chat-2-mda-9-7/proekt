@@ -6,13 +6,13 @@ import 'package:proekt/src/domain/user.dart';
 import 'package:provider/provider.dart';
 
 class LandingPage extends StatelessWidget {
-  const LandingPage({Key, key}) : super(key: key);
+  const LandingPage({Key, key}): super(key:key);
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context){
     final AuthUser? user = Provider.of<AuthUser?>(context);
     final bool isLoggedIn = user != null;
 
-    return isLoggedIn ? MyAp() : MyApp();
+    return isLoggedIn ?  MyAp() : MyApp();
   }
 }
